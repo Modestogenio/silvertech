@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SilverTech Chile - Teleasistencia Crítica y Tranquilidad Familiar</title>
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --card-bg: #131c2e;
+      --card-inner: #1a263d;
+      --border-color: #26354f;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-red: #ef4444;
+      --accent-green: #10b981;
+      --accent-blue: #38bdf8;
+      --accent-amber: #f59e0b;
+      --accent-purple: #a855f7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      padding: 24px;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .badge-chile {
+      background: #dc2626;
+      color: white;
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    .pill-value-prop {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+      font-size: 0.85rem;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-weight: 600;
+    }
+
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 1100px) {
+      .grid-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-title-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* KIOSK TABLET ADULTO MAYOR */
+    .kiosk-shell {
+      background: #020617;
+      border: 10px solid #1e293b;
+      border-radius: 28px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.8);
+    }
+
+    .kiosk-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #94a3b8;
+      font-size: 1.05rem;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 12px;
+    }
+
+    .kiosk-clock {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #38bdf8;
+      letter-spacing: 1px;
+    }
+
+    .kiosk-welcome {
+      text-align: center;
+      background: rgba(30, 41, 59, 0.5);
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #334155;
+    }
+
+    .kiosk-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .kiosk-btn {
+      border: none;
+      border-radius: 20px;
+      padding: 22px 16px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.15s ease-in-out;
+      text-align: center;
+      box-shadow: 0 6px 0 rgba(0, 0, 0, 0.4);
+    }
+
+    .kiosk-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
+    }
+
+    .kiosk-btn-icon {
+      font-size: 2.2rem;
+    }
+
+    .kiosk-btn-title {
+      font-size: 1.15rem;
+      letter-spacing: 0.5px;
+    }
+
+    .kiosk-btn-sub {
+      font-size: 0.75rem;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .btn-sos-critical {
+      background: linear-gradient(135deg, #ef4444, #b91c1c);
+      color: white;
+      grid-column: span 2;
+      padding: 28px 20px;
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.35), 0 8px 0 #7f1d1d;
+    }
+    .btn-sos-critical .kiosk-btn-title { font-size: 1.7rem; }
+
+    .btn-checkin {
+      background: linear-gradient(135deg, #10b981, #047857);
+      color: white;
+      box-shadow: 0 6px 0 #064e3b;
+    }
+
+    .btn-med-box {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: white;
+      box-shadow: 0 6px 0 #1e3a8a;
+    }
+
+    .btn-dropin-receive {
+      background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+      color: white;
+      grid-column: span 2;
+      box-shadow: 0 6px 0 #4c1d95;
+    }
+
+    .voice-command-bar {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .voice-prompt-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .voice-chip {
+      background: #1e293b;
+      border: 1px solid #475569;
+      color: #cbd5e1;
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .voice-chip:hover {
+      background: #334155;
+      color: white;
+    }
+
+    /* CONSOLA FAMILIAR & COMPRADOR */
+    .family-radar {
+      background: var(--card-inner);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .radar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .radar-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .metric-card {
+      background: #0b1322;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .metric-value {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    .value-ok { color: var(--accent-green); }
+    .value-warn { color: var(--accent-amber); }
+    .value-danger { color: var(--accent-red); }
+
+    .action-btn-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .action-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: white;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .action-btn:hover {
+      background: #334155;
+      border-color: #64748b;
+    }
+
+    .action-btn-urgent {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.4);
+      color: #f87171;
+    }
+    .action-btn-urgent:hover {
+      background: rgba(239, 68, 68, 0.25);
+    }
+
+    .action-btn-dropin {
+      background: rgba(168, 85, 247, 0.15);
+      border-color: rgba(168, 85, 247, 0.4);
+      color: #c084fc;
+    }
+    .action-btn-dropin:hover {
+      background: rgba(168, 85, 247, 0.25);
+    }
+
+    /* WHATSAPP & FEED AUDIT */
+    .chat-bubble {
+      background: #064e3b;
+      border-left: 4px solid var(--accent-green);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      color: #6ee7b7;
+      font-weight: 700;
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+    }
+
+    .chat-content {
+      font-family: monospace;
+      color: #ecfdf5;
+      white-space: pre-wrap;
+    }
+
+    .neighbor-box {
+      background: #1e1b4b;
+      border-left: 4px solid var(--accent-purple);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
+
+    .log-window {
+      background: #020617;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 12px;
+      height: 140px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: #7dd3fc;
+    }
+
+    .pill-active-dropin {
+      display: none;
+      background: #dc2626;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <h1>SilverTech Chile</h1>
+      <span class="badge-chile">TELEASISTENCIA CRÍTICA</span>
+    </div>
+    <div class="pill-value-prop">
+      🛡️ Solución de Paz Mental Familiar: Detección Activa + Red de Cuidados Inmediata
+    </div>
+  </header>
+
+  <div class="grid-layout">
+
+    <!-- COLUMNA 1: DISPOSITIVO KIOSK (TABLET ADULTO MAYOR) -->
+    <div>
+      <div class="card">
+        <div class="card-title-bar">
+          <div class="card-title">📱 Interfaz Kiosk Simplificada (En Casa de la Madre)</div>
+          <div id="dropin-indicator" class="pill-active-dropin">🔴 CANAL DROP-IN ABIERTO</div>
+        </div>
+
+        <div class="kiosk-shell">
+          <div class="kiosk-top">
+            <div>📍 Las Condes, Santiago</div>
+            <div id="kiosk-clock" class="kiosk-clock">12:00:00</div>
+          </div>
+
+          <div class="kiosk-welcome">
+            <div style="font-size: 1.15rem; font-weight: 700; color: #f1f5f9;">Marta Elena Silva (81 años)</div>
+            <div id="sub-status" style="font-size: 0.85rem; color: #94a3b8; margin-top: 2px;">
+              Último movimiento registrado: Hace 8 minutos en la cocina
+            </div>
+          </div>
+
+          <div class="kiosk-grid">
+            <!-- BOTÓN SOS CRÍTICO -->
+            <button class="kiosk-btn btn-sos-critical" onclick="triggerSOS()">
+              <span class="kiosk-btn-icon">🚨</span>
+              <span class="kiosk-btn-title">BOTÓN SOS DE EMERGENCIA</span>
+              <span class="kiosk-btn-sub">Avisa al SAMU 131, hijos y vecino de piso en 2 segundos</span>
+            </button>
+
+            <!-- CHECK-IN MATUTINO "ESTOY BIEN" -->
+            <button class="kiosk-btn btn-checkin" onclick="triggerCheckIn()">
+              <span class="kiosk-btn-icon">☀️</span>
+              <span class="kiosk-btn-title">"BUENOS DÍAS, ESTOY BIEN"</span>
+              <span class="kiosk-btn-sub">Check-in diario de tranquilidad</span>
+            </button>
+
+            <!-- RECORDATORIO FOTOGRÁFICO DE FÁRMACO -->
+            <button class="kiosk-btn btn-med-box" onclick="triggerMeds()">
+              <span class="kiosk-btn-icon">💊</span>
+              <span class="kiosk-btn-title">TOMAR ENALAPRIL (10mg)</span>
+              <span class="kiosk-btn-sub">Pastilla blanca con agua - Toca para confirmar</span>
+            </button>
+
+            <!-- DROP-IN DE VOZ ASISTIDA -->
+            <button class="kiosk-btn btn-dropin-receive" onclick="triggerVoiceDropIn()">
+              <span class="kiosk-btn-icon">🎙️</span>
+              <span class="kiosk-btn-title">HABLAR CON MI HIJO RODRIGO</span>
+              <span class="kiosk-btn-sub">Abre intercomunicador manos libres directo</span>
+            </button>
+          </div>
+
+          <!-- ASISTENTE DE VOZ NATURAL (SIMULADOR DE RECONOCIMIENTO) -->
+          <div class="voice-command-bar">
+            <span style="font-size: 1.4rem;">🗣️</span>
+            <div style="flex: 1;">
+              <div style="font-size: 0.8rem; font-weight: 700; color: #94a3b8;">COMANDOS POR VOZ EN TIEMPO REAL:</div>
+              <div class="voice-prompt-buttons">
+                <button class="voice-chip" onclick="simulateVoicePhrase('Me caí y no me puedo parar')">"Me caí y no me puedo parar"</button>
+                <button class="voice-chip" onclick="simulateVoicePhrase('Tengo un fuerte dolor en el pecho')">"Fuerte dolor en el pecho"</button>
+                <button class="voice-chip" onclick="simulateVoicePhrase('¿Qué pastilla me toca ahora?')">"¿Qué pastilla me toca ahora?"</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- COLUMNA 2: LA CONSOLA DEL HIJO (EL CLIENTE QUE PAGA) -->
+    <div>
+      <div class="card">
+        <div class="card-title-bar">
+          <div class="card-title">🛡️ Radar del Cuidador (App Móvil del Hijo Titular)</div>
+          <span style="font-size: 0.85rem; color: #38bdf8;">Rodrigo Silva (Hijo Titular)</span>
+        </div>
+
+        <!-- RADAR DE TRANQUILIDAD PASIVA -->
+        <div class="family-radar">
+          <div class="radar-header">
+            <span style="font-weight: 700; font-size: 0.9rem;">📊 ESTADO EN VIVO DEL DOMICILIO:</span>
+            <span id="inactivity-indicator" style="font-size: 0.8rem; color: #10b981;">● Rutina Normal</span>
+          </div>
+
+          <div class="radar-metrics">
+            <div class="metric-card">
+              <div class="metric-label">Inactividad</div>
+              <div id="val-inactivity" class="metric-value value-ok">8 min</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Adherencia Médica</div>
+              <div id="val-adherence" class="metric-value value-ok">100% Hoy</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Botón Colgante</div>
+              <div class="metric-value value-ok">94% Batería</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACCIONES DE PAZ MENTAL QUE VALEN UNA SUSCRIPCIÓN -->
+        <div class="action-btn-row">
+          <button class="action-btn action-btn-dropin" onclick="triggerDropInCall()">
+            <span>🔊</span> Activar Drop-in Ambiental (Sin que conteste)
+          </button>
+          <button class="action-btn action-btn-urgent" onclick="triggerInactivityAlert()">
+            <span>⚠️</span> Simular Alerta de Inactividad (+4 horas)
+          </button>
+        </div>
+
+        <!-- RESPUESTA WHATSAPP CLOUD API EN TIEMPO REAL -->
+        <div class="chat-bubble">
+          <div class="chat-header">
+            <span>WHATSAPP ALERTA INMEDIATA (+56998765432)</span>
+            <span>CLOUDFLARE / SUPABASE EDGE</span>
+          </div>
+          <div id="wa-text" class="chat-content">✅ 08:30 hrs: Marta Silva envió su saludo matutino "Buenos días, estoy bien". Todo en orden.</div>
+        </div>
+
+        <!-- RED VECINAL LOCAL DE PRIMERA RESPUESTA -->
+        <div class="neighbor-box">
+          <div style="display: flex; justify-content: space-between; font-weight: 700; color: #c084fc; margin-bottom: 6px;">
+            <span>🤝 Red Vecinal Inmediata (Plan Primeros 5 Minutos)</span>
+            <span id="neighbor-badge" style="color: #4ade80;">Listo para socorro</span>
+          </div>
+          <div id="neighbor-text" style="font-size: 0.8rem; color: #e2e8f0; line-height: 1.4;">
+            Vecino Asignado: <strong>Don Pedro Morales (Dpto 804, mismo piso)</strong>.<br>
+            En caso de SOS Vital, recibe un SMS prioritario con código de acceso antes de que arribe la ambulancia.
+          </div>
+        </div>
+
+        <!-- SÍNTESIS DE VOZ Y FEEDBACK -->
+        <div style="background: #020617; border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; margin-bottom: 16px;">
+          <div style="font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 4px;">Altavoz de la Tablet (TTS Local):</div>
+          <div id="tts-audio-box" style="color: #f8fafc; font-style: italic; font-size: 0.9rem;">"Sistema en guardia pasiva activa."</div>
+        </div>
+
+        <!-- AUDITORÍA DE EVENTOS -->
+        <div class="log-window" id="system-logs">
+          <div>[01:25:00] [OK] Monitor de signos de vida y movimiento activo.</div>
+          <div>[01:25:00] [OK] Contactos vinculados: Rodrigo Silva (Hijo 1), Camila Silva (Hija 2), Don Pedro (Vecino Piso).</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('kiosk-clock').textContent = now.toLocaleTimeString('es-CL');
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function speak(text) {
+      document.getElementById('tts-audio-box').textContent = `"${text}"`;
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'es-CL';
+        utterance.rate = 0.88; // Tono más pausado y calmado
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    function addLog(msg) {
+      const logs = document.getElementById('system-logs');
+      const time = new Date().toLocaleTimeString('es-CL');
+      const div = document.createElement('div');
+      div.textContent = `[${time}] ${msg}`;
+      logs.appendChild(div);
+      logs.scrollTop = logs.scrollHeight;
+    }
+
+    // 1. SOS CRÍTICO VITAL
+    function triggerSOS() {
+      speak("Alerta de emergencia recibida. Mantén la calma Marta, estamos llamando a Rodrigo, a tu vecino Don Pedro y enlazando con la ambulancia.");
+      
+      document.getElementById('wa-text').textContent = 
+        `🚨 *ALERTA SOS CRÍTICA SILVERTECH*\n\n` +
+        `Paciente: *Marta Elena Silva* (81 años)\n` +
+        `Ubicación: Av. Cristóbal Colón 4520, Dpto 801, Las Condes\n` +
+        `Antecedentes: Hipertensión, Artritis | Alergia: AINEs\n` +
+        `Acciones disparadas:\n` +
+        ` 1. Enlace SAMU 131 transmitido.\n` +
+        ` 2. SMS con clave de acceso enviado al vecino Don Pedro (Dpto 804).\n` +
+        ` 3. Llamada telefónica SIP discando a tu móvil ahora mismo.`;
+
+      document.getElementById('neighbor-badge').textContent = "🚨 ALERTA DESPACHADA";
+      document.getElementById('neighbor-badge').style.color = "#f87171";
+      document.getElementById('neighbor-text').innerHTML = 
+        `<strong>¡ALERTA ACTIVA!</strong> Notificación enviada a Don Pedro (Piso 8): <em>"Marta activó SOS. Por favor acuda de inmediato con su llave de emergencia."</em>`;
+
+      addLog("EMERGENCIA VITAL: Despacho tripartito (SAMU 131 + Familiares + Red Vecinal).");
+    }
+
+    // 2. CHECK-IN DIARIO "BUENOS DÍAS"
+    function triggerCheckIn() {
+      speak("Qué bueno saludarte esta mañana, Marta. Ya le avisé a tu hijo Rodrigo que estás despierta y bien.");
+      
+      document.getElementById('wa-text').textContent = 
+        `☀️ *CHECK-IN MATUTINO DE MARTA*\n\n` +
+        `Hora: ${new Date().toLocaleTimeString('es-CL')}\n` +
+        `Estado: Tu mamá acaba de presionar 'Buenos días, estoy bien' en la tablet.\n` +
+        `Próximo evento programado: Enalapril 10mg a las 13:00 hrs.`;
+
+      document.getElementById('sub-status').textContent = "Check-in matutino confirmado con éxito hoy.";
+      addLog("CHECK-IN: Registro de rutina completado sin necesidad de llamadas innecesarias.");
+    }
+
+    // 3. TOMA DE FÁRMACO
+    function triggerMeds() {
+      speak("Toma de Enalapril de 10 miligramos confirmada. Que tengas un excelente día.");
+      
+      document.getElementById('wa-text').textContent = 
+        `💊 *MEDICACIÓN CONFIRMADA*\n\n` +
+        `Marta confirmó la toma de *Enalapril 10mg* a las ${new Date().toLocaleTimeString('es-CL')}.\n` +
+        `Adherencia semanal: 100%.`;
+
+      document.getElementById('val-adherence').textContent = "100% Cumplido";
+      addLog("FÁRMACOS: Registro de adherencia guardado en Supabase.");
+    }
+
+    // 4. MODO DROP-IN ASISTIDO (Apertura de audio ambiental sin interacción de la madre)
+    function triggerDropInCall() {
+      const ind = document.getElementById('dropin-indicator');
+      ind.style.display = "block";
+      
+      speak("Canal de audio abierto con tu hijo Rodrigo.");
+      
+      document.getElementById('wa-text').textContent = 
+        `🎙️ *CANAL DROP-IN AMBIENTAL ACTIVADO*\n\n` +
+        `Has abierto el micrófono de la tablet de tu mamá. Puedes hablar directamente con ella ahora sin que tenga que levantarse o buscar el teléfono.`;
+
+      setTimeout(() => {
+        speak("Hola mamá, soy Rodrigo, ¿cómo te sientes hoy?");
+      }, 3500);
+
+      addLog("DROP-IN: Conexión de audio ambiental bidireccional autorizada.");
+    }
+
+    function triggerVoiceDropIn() {
+      speak("Conectando con el teléfono de Rodrigo.");
+      addLog("LLAMADA KIOSK: Solicitud de llamada iniciada por Marta.");
+    }
+
+    // 5. ALERTA DE INACTIVIDAD SOSPECHOSA (+4 HORAS SIN MOVIMIENTO)
+    function triggerInactivityAlert() {
+      document.getElementById('inactivity-indicator').textContent = "⚠️ INACTIVIDAD SOSPECHOSA";
+      document.getElementById('inactivity-indicator').style.color = "#f87171";
+      document.getElementById('val-inactivity').textContent = "4h 15m";
+      document.getElementById('val-inactivity').className = "metric-value value-danger";
+
+      document.getElementById('wa-text').textContent = 
+        `⚠️ *ALERTA PROACTIVA DE INACTIVIDAD*\n\n` +
+        `Han pasado más de 4 horas sin detección de movimiento ni toques en la tablet en el hogar de Marta (habitualmente activa en este horario).\n\n` +
+        `👉 Sugerencia: Usa el botón 'Activar Drop-in Ambiental' para escuchar si todo está bien o llama a su vecino Don Pedro.`;
+
+      speak("Marta, no hemos detectado movimiento en unas horas. ¿Te encuentras bien?");
+      addLog("PROACTIVO: Algoritmo de inactividad disparó alerta preventiva de bienestar.");
+    }
+
+    // 6. COMANDOS POR VOZ
+    function simulateVoicePhrase(phrase) {
+      if (phrase.includes("caí")) {
+        speak("Escuché que te caíste. No intentes levantarte brusco, ya estoy avisando a tu hijo y a la ambulancia.");
+        triggerSOS();
+      } else if (phrase.includes("pecho")) {
+        speak("Alerta médica. Dolor de pecho registrado, activando protocolo de urgencia SAMU de inmediato.");
+        triggerSOS();
+      } else if (phrase.includes("pastilla")) {
+        speak("Marta, te toca Enalapril de 10 miligramos después de almuerzo con un vaso de agua.");
+      }
+    }
+  </script>
+</body>
+</html>
